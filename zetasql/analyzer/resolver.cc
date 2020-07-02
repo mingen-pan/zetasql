@@ -1108,4 +1108,12 @@ bool Resolver::SupportsEquality(const Type* type1, const Type* type2) {
       && supertype->SupportsEquality(analyzer_options_.language_options());
 }
 
+absl::Status Resolver::ResolveFromClause(
+        const ASTSelect* select, const ASTOrderBy* order_by,
+        const NameScope* external_scope,
+        std::unique_ptr<const ResolvedScan>* output_scan,
+        std::shared_ptr<const NameList>* output_name_list) {
+    return Resolver::ResolveFromClauseAndCreateScan(select, order_by, external_scope, output_scan, output_name_list);
+}
+
 }  // namespace zetasql

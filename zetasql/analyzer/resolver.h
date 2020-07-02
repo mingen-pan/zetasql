@@ -231,6 +231,12 @@ class Resolver {
     return analyzer_options_.language();
   }
 
+  absl::Status ResolveFromClause(
+        const ASTSelect* select, const ASTOrderBy* order_by,
+        const NameScope* external_scope,
+        std::unique_ptr<const ResolvedScan>* output_scan,
+        std::shared_ptr<const NameList>* output_name_list);
+
   // Clear state so this can be used to resolve a second statement whose text
   // is contained in <sql>.
   void Reset(absl::string_view sql);
